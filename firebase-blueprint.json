@@ -1,0 +1,182 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 256 },
+        "photoURL": { "type": "string", "maxLength": 2048 },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLoginAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["active", "suspended"] }
+      },
+      "required": ["uid", "email", "role", "createdAt", "status"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "User visual creation project",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 120 },
+        "tool": { "type": "string", "maxLength": 64 },
+        "originalFile": { "type": "string", "maxLength": 2048 },
+        "resultFile": { "type": "string", "maxLength": 2048 },
+        "status": { "type": "string", "enum": ["draft", "processing", "completed", "failed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["projectId", "userId", "name", "tool", "status", "createdAt"]
+    },
+    "Generation": {
+      "title": "Generation",
+      "description": "AI model generation run log",
+      "type": "object",
+      "properties": {
+        "generationId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "tool": { "type": "string", "maxLength": 64 },
+        "prompt": { "type": "string", "maxLength": 2000 },
+        "inputFile": { "type": "string", "maxLength": 2048 },
+        "outputFile": { "type": "string", "maxLength": 2048 },
+        "model": { "type": "string", "maxLength": 64 },
+        "provider": { "type": "string", "maxLength": 64 },
+        "status": { "type": "string", "enum": ["queued", "processing", "completed", "failed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "processingTime": { "type": "number" },
+        "errorMessage": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["generationId", "userId", "tool", "status", "createdAt"]
+    },
+    "File": {
+      "title": "File",
+      "description": "Uploaded or exported file metadata",
+      "type": "object",
+      "properties": {
+        "fileId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "storagePath": { "type": "string", "maxLength": 256 },
+        "name": { "type": "string", "maxLength": 120 },
+        "size": { "type": "number" },
+        "mimeType": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fileId", "userId", "storagePath", "name", "size", "createdAt"]
+    },
+    "ToolUsage": {
+      "title": "ToolUsage",
+      "description": "Metric tracking of tool executions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "tool": { "type": "string", "maxLength": 64 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "processingTimeMs": { "type": "number" },
+        "success": { "type": "boolean" }
+      },
+      "required": ["id", "userId", "tool", "timestamp", "success"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "User bookmarked creations",
+      "type": "object",
+      "properties": {
+        "favoriteId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "projectId": { "type": "string", "maxLength": 128 },
+        "imageUrl": { "type": "string", "maxLength": 2048 },
+        "title": { "type": "string", "maxLength": 120 },
+        "tool": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["favoriteId", "userId", "imageUrl", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification alert",
+      "type": "object",
+      "properties": {
+        "notificationId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 120 },
+        "message": { "type": "string", "maxLength": 500 },
+        "type": { "type": "string", "enum": ["success", "info", "error"] },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["notificationId", "userId", "title", "message", "type", "read", "createdAt"]
+    },
+    "AdminLog": {
+      "title": "AdminLog",
+      "description": "Audit trail log of admin operations",
+      "type": "object",
+      "properties": {
+        "logId": { "type": "string", "maxLength": 128 },
+        "adminId": { "type": "string", "maxLength": 128 },
+        "action": { "type": "string", "maxLength": 100 },
+        "details": { "type": "string", "maxLength": 1000 },
+        "targetUserId": { "type": "string", "maxLength": 128 },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["logId", "adminId", "action", "details", "timestamp"]
+    },
+    "SystemSetting": {
+      "title": "SystemSetting",
+      "description": "Platform global configuration and operational switches",
+      "type": "object",
+      "properties": {
+        "settingId": { "type": "string", "maxLength": 64 },
+        "maintenanceMode": { "type": "boolean" },
+        "dailyRateLimitPerUser": { "type": "number" },
+        "maxFileSizeMB": { "type": "number" },
+        "activeProvider": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["settingId", "maintenanceMode", "dailyRateLimitPerUser", "maxFileSizeMB", "activeProvider", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile records"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Visual creation project documents"
+    },
+    "/generations/{generationId}": {
+      "schema": "Generation",
+      "description": "AI operation logs"
+    },
+    "/files/{fileId}": {
+      "schema": "File",
+      "description": "Storage file indices"
+    },
+    "/tool_usage/{id}": {
+      "schema": "ToolUsage",
+      "description": "Tool metrics and monitoring"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "User bookmarked creations"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "User notifications"
+    },
+    "/admin_logs/{logId}": {
+      "schema": "AdminLog",
+      "description": "Audit trails for administrative actions"
+    },
+    "/system_settings/{settingId}": {
+      "schema": "SystemSetting",
+      "description": "Global application configuration"
+    }
+  }
+}

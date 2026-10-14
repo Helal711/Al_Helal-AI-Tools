@@ -1,0 +1,6 @@
+{
+  "name": "Al_Helal AI Tools",
+  "description": "Next-generation AI visual creation, image enhancement, cutout, and studio design platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Al_Helal AI Tools — Create. Enhance. Transform.</title>
+    <meta name="description" content="Next-generation AI visual creation, image enhancement, cutout, and studio design platform. High-performance, secure, and free to use." />
+    <meta name="keywords" content="AI image generator, background remover, photo enhancer, object remover, image editor, cutout, passport photo" />
+
+    <!-- PWA & Mobile Web App Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Al_Helal AI Tools" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Al_Helal AI Tools — Create. Enhance. Transform." />
+    <meta property="og:description" content="Next-generation AI visual creation, image enhancement, cutout, and studio design platform." />
+    <meta property="og:site_name" content="Al_Helal AI Tools" />
+    <meta property="og:image" content="/icon-512.png" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Al_Helal AI Tools — Create. Enhance. Transform." />
+    <meta name="twitter:description" content="Next-generation AI visual creation, image enhancement, cutout, and studio design platform." />
+    <meta name="twitter:image" content="/icon-512.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Al_Helal AI Tools",
+        "operatingSystem": "All",
+        "applicationCategory": "DesignApplication",
+        "description": "Next-generation AI visual creation, image enhancement, cutout, and studio design platform.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+
+    <script>
+      // Gracefully suppress Vite HMR WebSocket retry logs in sandboxed iframe environments
+      window.addEventListener('error', (e) => {
+        if (e.message && (e.message.includes('WebSocket') || e.message.includes('@vite/client') || e.message.includes('createWebSocketModuleRunnerTransport'))) {
+          e.stopImmediatePropagation();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', (e) => {
+        const str = String(e.reason || '');
+        if (str.includes('WebSocket') || str.includes('@vite/client') || str.includes('createWebSocketModuleRunnerTransport')) {
+          e.stopImmediatePropagation();
+        }
+      }, true);
+
+      // Register Service Worker for PWA shell caching
+      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch((err) => {
+            console.debug('ServiceWorker registration skipped:', err);
+          });
+        });
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
